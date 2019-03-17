@@ -230,7 +230,8 @@ def training_loop(
                 tflib.run([D_train_op, Gs_update_op], {lod_in: sched.lod, lrate_in: sched.D_lrate, minibatch_in: sched.minibatch})
                 cur_nimg += sched.minibatch
             tflib.run([G_train_op], {lod_in: sched.lod, lrate_in: sched.G_lrate, minibatch_in: sched.minibatch})
-
+            
+        print("Trained " + str(cur_nimg))
         # Perform maintenance tasks once per tick.
         done = (cur_nimg >= total_kimg * 1000)
         if cur_nimg >= tick_start_nimg + sched.tick_kimg * 1000 or done:
@@ -261,7 +262,7 @@ def training_loop(
             if cur_tick % network_snapshot_ticks == 0 or done or cur_tick == 1:
                 pkl = os.path.join(submit_config.run_dir, 'network-snapshot-%06d.pkl' % (cur_nimg // 1000))
                 misc.save_pkl((G, D, Gs), pkl)
-                metrics.run(pkl, run_dir=submit_config.run_dir, num_gpus=submit_config.num_gpus, tf_config=tf_config)
+                #metrics.run(pkl, run_dir=submit_config.run_dir, num_gpus=submit_config.num_gpus, tf_config=tf_config)
 
             # Update summaries and RunContext.
             metrics.update_autosummaries()
