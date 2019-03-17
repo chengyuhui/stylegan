@@ -237,6 +237,6 @@ We thank Jaakko Lehtinen, David Luebke, and Tuomas Kynk&auml;&auml;nniemi for in
 * Follow instructions from TensorFlow and install CUDA kits.
 * `pipenv install` to install all python-related libs.
 * Download [this file](https://mega.nz/#!aPRFDKaC!FDpQi_FEPK443JoRBEOEDOmlLmJSblKFlqZ1A1XPt2Y) and save it to `models/`
-* Prepare your dataset (anime character *faces* @ 512x512) and convert them into a TFRecord with [dataset_tool.py](./dataset_tool.py) (see above for detail)
+* Prepare your dataset with [detect.py](./detect.py) (you may need to change the offsets in L21~24 to suit your needs) and convert them into a TFRecord with [dataset_tool.py](./dataset_tool.py) (see above for detail)
 * Edit [train.py](./train.py), rename the uncommented dataset option (reimu) to yours.
 * `pipenv run python ./train.py` and wait for magic.
